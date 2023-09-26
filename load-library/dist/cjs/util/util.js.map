@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../../../src/util/util.ts"],
+  "sourcesContent": ["import { csvSummary, jUnit, textSummary } from '../k6-libs/k6-summary'\n\n\n// eslint-disable-next-line @typescript-eslint/no-explicit-any\nexport function handleSummary(data: any) {\n  const summary: { [key: string]: string } = {}\n  let showColors = true\n\n  if (__ENV.UPLOAD_RESULTS === 'true') {\n    showColors = false\n    const outdir = __ENV.OUT_DIR ?? '.'\n    summary[`${outdir}/junit.xml`] = jUnit(data, null)\n    summary[`${outdir}/summary.csv`] = csvSummary(data, null)\n    summary[`${outdir}/summary.txt`] = textSummary(data, { indent: ' ', enableColors: false })\n  } else {\n    summary.stdout = textSummary(data, { indent: ' ', enableColors: showColors })\n  }\n\n  return summary\n}\n"],
+  "mappings": ";;;;;;;;;;;;;;;;;;AAAA;AAAA;AAAA;AAAA;AAAA;AAAA,wBAA+C;AAIxC,SAAS,cAAc,MAAW;AAJzC;AAKE,QAAM,UAAqC,CAAC;AAC5C,MAAI,aAAa;AAEjB,MAAI,MAAM,mBAAmB,QAAQ;AACnC,iBAAa;AACb,UAAM,UAAS,WAAM,YAAN,YAAiB;AAChC,YAAQ,GAAG,kBAAkB,QAAI,yBAAM,MAAM,IAAI;AACjD,YAAQ,GAAG,oBAAoB,QAAI,8BAAW,MAAM,IAAI;AACxD,YAAQ,GAAG,oBAAoB,QAAI,+BAAY,MAAM,EAAE,QAAQ,KAAK,cAAc,MAAM,CAAC;AAAA,EAC3F,OAAO;AACL,YAAQ,aAAS,+BAAY,MAAM,EAAE,QAAQ,KAAK,cAAc,WAAW,CAAC;AAAA,EAC9E;AAEA,SAAO;AACT;",
+  "names": []
+}
