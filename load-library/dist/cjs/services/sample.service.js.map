@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../../../src/services/sample.service.ts"],
+  "sourcesContent": ["import http, { RefinedResponse, ResponseType } from 'k6/http'\nimport { check, sleep } from 'k6'\nimport { Trend } from 'k6/metrics'\n\nexport default class SampleService {\n  protected delay = 1\n\n  constructor(delay = 1) {\n    this.delay = delay\n  }\n\n  public loadK6Page(...trends: Trend[]): RefinedResponse<ResponseType | undefined> {\n    const res = http.get('https://test.k6.io')\n    sleep(this.delay)\n\n    trends.forEach((trend: Trend) => {\n      trend.add(res.timings.waiting)\n    })\n\n    check(res, {\n      'K6 page request accepted': r => r.status === 200,\n      'K6 page content returned': r => r.body != null && r.body.length > 0,\n    })\n\n    return res\n  }\n}\n"],
+  "mappings": ";;;;;;;;;;;;;;;;;;;;;;;;;;;;AAAA;AAAA;AAAA;AAAA;AAAA;AAAA,kBAAoD;AACpD,gBAA6B;AAG7B,MAAO,cAA4B;AAAA,EAGjC,YAAY,QAAQ,GAAG;AAFvB,SAAU,QAAQ;AAGhB,SAAK,QAAQ;AAAA,EACf;AAAA,EAEO,cAAc,QAA4D;AAC/E,UAAM,MAAM,YAAAA,QAAK,IAAI,oBAAoB;AACzC,yBAAM,KAAK,KAAK;AAEhB,WAAO,QAAQ,CAAC,UAAiB;AAC/B,YAAM,IAAI,IAAI,QAAQ,OAAO;AAAA,IAC/B,CAAC;AAED,yBAAM,KAAK;AAAA,MACT,4BAA4B,OAAK,EAAE,WAAW;AAAA,MAC9C,4BAA4B,OAAK,EAAE,QAAQ,QAAQ,EAAE,KAAK,SAAS;AAAA,IACrE,CAAC;AAED,WAAO;AAAA,EACT;AACF;",
+  "names": ["http"]
+}

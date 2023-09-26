@@ -1,0 +1,78 @@
+{
+    "name": "load-library",
+    "version": "1.0.0",
+    "description": "An example library of K6 wrapped API calls for use in load testing",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/felicia-walker/k6-template-complex-dev"
+    },
+    "author": "Felicia Walker <felicia-walker-seattle@proton.me",
+    "license": "MIT",
+    "type": "commonjs",
+    "main": "dist/cjs/index.js",
+    "module": "dist/esm/index.mjs",
+    "types": "index.d.ts",
+    "typesVersions": {
+        "*": {
+            "k6-libs/*": [
+                "dist/types/k6-libs/*.d.ts"
+            ],
+            "services/*": [
+                "dist/types/services/*.d.ts"
+            ],
+            "util/*": [
+                "dist/types/util/*.d.ts"
+            ]
+        }
+    },
+    "exports": {
+        ".": {
+            "types": "./dist/types/index.d.ts",
+            "import": "./dist/esm/index.js",
+            "require": "./dist/cjs/index.js"
+        },
+        "./k6-libs/*": {
+            "types": "./dist/types/k6-libs/*.d.ts",
+            "import": "./dist/esm/k6-libs/*.js",
+            "require": "./dist/cjs/k6-libs/*.js"
+        },
+        "./services/*": {
+            "types": "./dist/types/services/*.d.ts",
+            "import": "./dist/esm/services/*.js",
+            "require": "./dist/cjs/services/*.js"
+        },
+        "./util/*": {
+            "types": "./dist/types/util/*.d.ts",
+            "import": "./dist/esm/util/*.js",
+            "require": "./dist/cjs/util/*.js"
+        },
+        "./package.json": "./package.json"
+    },
+    "files": [
+        "dist",
+        "tsconfig.json",
+        "changelog.md"
+    ],
+    "dependencies": {
+        "core-js": "^3.31.1",
+        "path": "^0.12.7",
+        "typescript-logging": "^2.0.1",
+        "typescript-logging-category-style": "^2.0.1"
+    },
+    "devDependencies": {
+        "@types/glob": "^8.0.0",
+        "@types/k6": "^0.45.0",
+        "@types/node": "^18.11.17",
+        "glob": "~8.0.3",
+        "rimraf": "^3.0.2",
+        "tsx": "^3.12.2",
+        "typescript": "^4.7.4"
+    },
+    "scripts": {
+        "clean": "rimraf dist docs yarn.lock node_modules",
+        "build:clean": "rimraf dist",
+        "build:code": "tsx ./scripts/bundle.ts",
+        "build:types": "tsc --emitDeclarationOnly --outDir dist/types",
+        "build": "yarn build:clean && yarn build:code && yarn build:types"
+    }
+}

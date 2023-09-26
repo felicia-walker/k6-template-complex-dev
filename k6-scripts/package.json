@@ -1,0 +1,39 @@
+{
+    "name": "k6-scripts",
+    "version": "1.0.0",
+    "description": "Sample k6 script using a custom external library",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/felicia-walker/k6-template-complex-dev"
+    },
+    "author": "Felicia Walker <felicia-walker-seattle@proton.me",
+    "private": false,
+    "type": "commonjs",
+    "dependencies": {
+        "load-library": "link:../load-library"
+    },
+    "devDependencies": {
+        "@babel/core": "7.13.16",
+        "@babel/plugin-proposal-class-properties": "7.13.0",
+        "@babel/plugin-proposal-object-rest-spread": "7.13.8",
+        "@babel/preset-env": "7.13.15",
+        "@babel/preset-typescript": "7.13.0",
+        "@types/k6": "^0.43.0",
+        "@types/webpack": "5.28.0",
+        "babel-loader": "8.2.2",
+        "babel-plugin-module-resolver": "^5.0.0",
+        "clean-webpack-plugin": "4.0.0-alpha.0",
+        "copy-webpack-plugin": "^9.0.1",
+        "core-js": "^3.0.1",
+        "typescript": "^4.7.4",
+        "webpack": "5.76.0",
+        "webpack-cli": "4.6.0",
+        "webpack-glob-entries": "^1.0.1"
+    },
+    "scripts": {
+        "build": "NODE_OPTIONS=--openssl-legacy-provider webpack"
+    },
+    "keywords": [
+        "k6"
+    ]
+}
